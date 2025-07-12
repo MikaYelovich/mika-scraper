@@ -1,8 +1,8 @@
 <div align="center">
-  <h1>Mika Scraper</h1>
-  <img src="https://files.catbox.moe/rmobse.jpeg" alt="Mika Scraper Logo" width="800">
+  <h1>MIKA SCRAPER</h1>
+  <img src="https://files.cloudkuimages.guru/images/dNiKJ165.jpg" alt="Mika Scraper Logo" width="400">
   <p>
-    <strong>A modular and extensible web scraping toolkit built with TypeScript, axios, and cheerio.</strong>
+    <strong>A modular and extensible web scraping toolkit built with TypeScript</strong>
   </p>
   <p>
     Crafted for developers who need a reliable, fast, and easy-to-use solution for data extraction.
@@ -10,8 +10,6 @@
   
   <p>
     <a href="https://www.npmjs.com/package/mika-scraper"><img src="https://img.shields.io/npm/v/mika-scraper.svg?style=flat-square" alt="NPM Version"></a>
-    <a href="https://github.com/MikaYelovich/mika-scraper/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/MikaYelovich/mika-scraper/ci.yml?branch=main&style=flat-square" alt="Build Status"></a>
-    <a href="https://codecov.io/gh/MikaYelovich/mika-scraper"><img src="https://img.shields.io/codecov/c/github/MikaYelovich/mika-scraper.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://www.npmjs.com/package/mika-scraper"><img src="https://img.shields.io/npm/dt/mika-scraper.svg?style=flat-square" alt="NPM Downloads"></a>
     <a href="https://github.com/MikaYelovich/mika-scraper/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/mika-scraper.svg?style=flat-square" alt="License"></a>
     <a href="https://typescriptlang.org"><img src="https://img.shields.io/badge/written%20in-TypeScript-blue.svg?style=flat-square" alt="Written in TypeScript"></a>
@@ -34,6 +32,39 @@ Web scraping can be complex. You need to handle network requests, parse HTML, ma
 - **💻 Powerful CLI**: A command-line interface to run your scrapers, manage configurations, and streamline your workflow.
 
 ---
+
+## 🚀 Update v1.0.1 – Major Improvements & Feature Expansion
+
+We’re thrilled to introduce **v1.0.1**, a pivotal release that significantly enhances performance, stability, and functionality across the board. This version reflects our continued commitment to delivering a lightweight, intelligent, and highly extensible experience.
+
+---
+
+### 🛠 Core Improvements
+
+- **ESM Export Module Fix**  
+  Resolved inconsistencies with ES Module exports for better compatibility and seamless integration across modern environments.
+
+- **Package Optimization**  
+  Streamlined the package to significantly reduce its footprint—resulting in faster installs, leaner builds, and improved runtime efficiency.
+
+- **Error Handling Enhancements**  
+  Addressed multiple edge-case errors and improved error messaging for a smoother developer experience and more reliable behavior.
+
+---
+
+### 🌟 New Features
+
+We’ve added a powerful suite of tools and AI-driven capabilities to supercharge your creative and development workflow:
+
+- **AIFreeBox**
+- **Deepfake** – Generate realistic synthetic media (for ethical and educational use only).
+- **ToGhibli** – Instantly transform content into Studio Ghibli-inspired prompts or visuals.
+- **MCStalker** – Mine metadata and context from content with a Minecraft-themed twist.
+- **Nakanimendo** – Retreive info from Nakanimendo website
+- **Song Lyrics** – Retrieve, generate, or analyze song lyrics with contextual awareness.
+- **Gemini** – Interface with multi-modal AI capabilities, powered by Gemini integration.
+- **...and more to come** – We're just getting started.
+- ***
 
 ## 📋 Table of Contents
 
@@ -72,24 +103,22 @@ import { humanizeText } from 'mika-scraper';
 // cjs
 const { humanizeText } = require('mika-scraper');
 
-(async() => {
-    const result = await humanizeText("Nama saya adalah Zann");
-    console.log(result); // "Namaku ialah Zann"
-})()
+(async () => {
+  const result = await humanizeText('Nama saya adalah Zann');
+  console.log(result); // "Namaku ialah Zann"
+})();
 ```
 
 2.  **Run the scraper:**
 
 You can run it via `node index.js` or via the CLI.
 
-
 **Via CLI:**
 
 First, install the CLI globally:
+
 ```bash
 npm install -g mika-scraper
-# or
-npm link
 ```
 
 And now you can run the CLI:
@@ -101,8 +130,6 @@ mika-scraper humanize --text "Nama saya adalah Zann"
 
 ---
 
-
-
 ---
 
 ## 💻 CLI Usage
@@ -110,7 +137,7 @@ mika-scraper humanize --text "Nama saya adalah Zann"
 Mika Scraper comes with a handy CLI to make running your scrapers a breeze.
 
 ```bash
-mika-scraper <command> [options]
+mika-scraper <command> [options] | [method] | [query]
 ```
 
 **Commands:**
@@ -118,7 +145,7 @@ mika-scraper <command> [options]
 - **`humanize`**: Executes a specific scraper.
   - `--text <text>`: Text to be humanized.
   - `--level`: Level of humanization (default: `enhanced`).
-  
+
 **Example:**
 
 ```bash

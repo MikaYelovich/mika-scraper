@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/types",
+    "rootDir": "src",
+    "composite": true,
+    "module": "ESNext", // sesuai targetmu
+    "moduleResolution": "Node"
+  },
+  "include": ["src"],
+  "exclude": ["**/*.test.ts"]
+}

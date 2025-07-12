@@ -682,4 +682,329 @@ interface ScrapeResult {
  */
 declare function ytdl(youtubeUrl: string): Promise<ScrapeResult>;
 
-export { type Anime, AnimeFinder, type AnimeFinderError, type AnimeFinderResult, type AnimeReference, Animob, type ChatPayload, DeepseekR1, type DownloadLink, type EnhanceImageOptions, type Episode, type FantaxyCompletedResponse, FeloSearch, type GradioChatOutput, type GradioStreamMessage, type ImageResult, type InstagramMedia, type LogoFileData, type LogoRequestOptions, MagicStudioArt, type McpedlCategory, type McpedlEntry, McpedlSearch, type MediaFormat, type MediaTrack, type Metadata, MobileLegendsNewsInfo, type MobileLegendsNewsItem, PoemGenerator, type RetryOptions, type ScrapeResult, type StickerPack, type StreamResponse, type StreamServer, TempMail, type TempMailCreateData, type TempMailCreateResult, type TempMailMessage, type TempMailResponse, TextCraftClient, type TextCraftInput, type TikTokResult, type VideoResult, categoryMap, downloadTikTok, enhanceImage, generateLogo, getStickersFromPack, instagram, poemLanguages, poemLengths, poemTypes, searchSticker, ytdl };
+/**
+ * Type for supported rewrite levels
+ */
+type RewriteLevel = 'standard' | 'enhanced' | 'aggressive';
+/**
+ * Fine-tuning flags for rewriting behavior
+ */
+interface RewriteSettings {
+    removeUnicode?: boolean;
+    dashesToCommas?: boolean;
+    removeDashes?: boolean;
+    transformQuotes?: boolean;
+    removeWhitespace?: boolean;
+    removeEmDash?: boolean;
+    keyboardOnly?: boolean;
+}
+/**
+ * Successful transformation response
+ */
+interface HumanizeSuccess {
+    success: true;
+    code: 200;
+    level: RewriteLevel;
+    result: {
+        code: string;
+        originalLength: number;
+        transformedLength: number;
+        reductionPercentage: string;
+    };
+}
+/**
+ * Failed transformation response
+ */
+interface HumanizeFailure {
+    success: false;
+    code: number;
+    result: {
+        error: string;
+        isLevel?: RewriteLevel[];
+    };
+}
+/**
+ * Union type for all possible responses
+ */
+type HumanizeResult = HumanizeSuccess | HumanizeFailure;
+/**
+ * Rewrite AI-generated text to make it more human-sounding using UnaiMyText.
+ *
+ * @param text - Input text to be humanized (required)
+ * @param level - Rewrite level: 'standard', 'enhanced', or 'aggressive'
+ * @param settings - Optional custom settings to override default rewriting behavior
+ *
+ * @returns A structured object indicating success/failure and rewritten content
+ */
+declare function humanizeText(text: string, level?: RewriteLevel, settings?: RewriteSettings): Promise<HumanizeResult>;
+
+/** Predefined aspect ratios allowed by AI Freebox API */
+type SupportedAspectRatios = '1:1' | '2:3' | '9:16' | '16:9';
+/** Predefined slug values representing the generation model */
+type SupportedSlugs = 'ai-art-generator' | 'ai-fantasy-map-creator' | 'ai-youtube-thumbnail-generator' | 'ai-old-cartoon-characters-generator';
+/** Params object for AIFreeboxImage function */
+interface AIFreeboxImageParams {
+    prompt: string;
+    aspectRatio?: SupportedAspectRatios;
+    slug?: SupportedSlugs;
+}
+/**
+ * Generates an image using the AI Freebox API.
+ *
+ * @param {string} prompt - The prompt describing the image content.
+ * @param {SupportedAspectRatios} aspectRatio - The desired aspect ratio of the image.
+ * @param {SupportedSlugs} slug - The category or model used for generation.
+ *
+ * @returns {Promise<string>} The URL of the generated image.
+ *
+ * @throws Will throw an error if the aspectRatio or slug is invalid, or if the API fails.
+ */
+declare function AIFreeboxImage(prompt: string, aspectRatio?: SupportedAspectRatios, slug?: SupportedSlugs): Promise<string>;
+
+/**
+ * Represents an inline image for a Gemini prompt.
+ */
+interface GeminiInlineImage {
+    mime_type: string;
+    data: string;
+}
+/**
+ * Represents a part of a Gemini prompt.
+ */
+interface GeminiPromptPart {
+    text?: string;
+    inline_data?: GeminiInlineImage;
+}
+/**
+ * Represents a Gemini prompt.
+ */
+interface GeminiRequest {
+    contents: {
+        parts: GeminiPromptPart[];
+    }[];
+}
+/**
+ * Represents a response from the Gemini API.
+ */
+interface GeminiResponseCandidate {
+    content?: {
+        parts?: {
+            text: string;
+        }[];
+    };
+}
+/**
+ * Represents the response from the Gemini API.
+ */
+interface GeminiResponse {
+    candidates?: GeminiResponseCandidate[];
+    promptFeedback?: {
+        blockReason?: string;
+        safetyRatings?: any;
+    };
+}
+/**
+ * Generates content using Gemini AI.
+ * @param apiKey - Your Gemini API Key
+ * @param textPrompt - Prompt to send as text
+ * @param imageDataBase64 - Optional base64-encoded image
+ * @param mimeType - MIME type of the image (defaults to 'image/jpeg')
+ * @returns AI-generated string content or error details
+ */
+declare function GeminiAi(apiKey: string, textPrompt?: string, imageDataBase64?: string, mimeType?: string): Promise<string>;
+
+interface UploadResponseUrl {
+    url: string;
+}
+/**
+ * Interface untuk response upload gambar ke GhibliAI.
+ */
+interface UploadResponse {
+    data: UploadResponseUrl;
+}
+/**
+ * Interface untuk request transformasi gambar ke GhibliAI.
+ */
+interface TransformRequest {
+    imageUrl: string;
+    sessionId: string;
+    prompt: string;
+    timestamp: string;
+}
+/**
+ * Interface untuk response transformasi gambar ke GhibliAI.
+ */
+interface TransformInitResponse {
+    taskId: string;
+}
+/**
+ * Interface untuk response status transformasi gambar ke GhibliAI.
+ */
+interface TransformStatusResponse {
+    status: 'pending' | 'success' | 'error';
+    imageUrl?: string;
+}
+/**
+ * Mengubah sebuah buffer gambar menjadi gaya Ghibli menggunakan Ghibli AI.
+ * @param buffer Buffer gambar.
+ * @param prompt Prompt kustom untuk transformasi gambar.
+ * @returns URL hasil gambar dalam gaya Ghibli.
+ */
+declare function ImageToGhibli(buffer: Buffer, prompt?: string): Promise<string>;
+
+/**
+ * Minecraft player name history entry
+ */
+interface NameHistoryEntry {
+    name: string;
+    changedToAt?: string;
+}
+/**
+ * Minecraft player profile
+ */
+interface MinecraftProfile {
+    username: string;
+    id: string;
+    short_id: string;
+    raw_id: string;
+    avatar: string;
+    skin_texture: string;
+    name_history: NameHistoryEntry[];
+    head_preview: string;
+    full_body_preview_hd: string;
+    skin_download: string;
+    qr_uuid: string;
+    profile_valid: boolean;
+    skin_model: string;
+    namemc_url: string;
+}
+/**
+ * Minecraft player profile result
+ */
+interface MinecraftStalkResult {
+    status: number;
+    data?: MinecraftProfile;
+    error?: string;
+    reason?: string;
+}
+/**
+ * Fetch Minecraft player profile from PlayerDB and Mojang APIs.
+ * @param username Minecraft username (case-insensitive)
+ * @returns Minecraft profile or descriptive error object
+ */
+declare function MinecraftStalk(username: string): Promise<MinecraftStalkResult>;
+
+/**
+ * src/nakanime.ts
+ * Provides methods to fetch anime data from Nakanime API
+ */
+/**
+ * Interface definitions for Nakanime scraper API responses.
+ */
+interface AnimeData {
+    id: number;
+    title: string;
+    slug: string;
+    thumbnail: string;
+    type: string | null;
+    url: string;
+    status: string;
+}
+/**
+ * Genre data interface
+ */
+interface GenreData {
+    id: number;
+    name: string;
+    slug: string;
+}
+/**
+ * Search result interface
+ */
+interface SearchResult {
+    data: AnimeData[];
+}
+/**
+ * Genre list interface
+ */
+interface GenreList {
+    data: GenreData[];
+}
+/**
+ * Class for accessing anime data from Nakanime unofficial API.
+ */
+declare class Nakanime {
+    private client;
+    constructor();
+    /**
+     * Get anime list sorted by order type.
+     * @param order Sorting method ('title', 'latest', 'popular', etc.)
+     * @param page Page number
+     */
+    get(order?: string, page?: number): Promise<SearchResult>;
+    /**
+     * Get anime list by genre
+     * @param genre Genre slug (e.g., 'action', 'comedy')
+     * @param page Page number
+     */
+    genre(genre: string, page?: number): Promise<any>;
+    /**
+     * Search anime by keyword
+     * @param query Search term
+     */
+    search(query: string): Promise<SearchResult>;
+    /**
+     * Get anime detail from URL
+     * @param url Anime detail page URL
+     */
+    getDetail(url: string): Promise<any>;
+    /**
+     * Get episode data from URL
+     * @param url Episode URL
+     */
+    getData(url: string): Promise<any>;
+}
+
+/**
+ * Interface untuk input transformasi gambar menggunakan DeepfakeMaker.io
+ */
+interface DeepfakeInput {
+    buffer: Buffer;
+    prompt: string;
+}
+/**
+ * Interface untuk pesan WebSocket
+ */
+interface WebSocketMessage {
+    msg: string;
+    output?: {
+        result: string[];
+    };
+}
+/**
+ * Melakukan transformasi gambar menggunakan DeepfakeMaker.io
+ * @param buffer Buffer dari gambar yang akan diubah
+ * @param prompt Prompt deskriptif untuk mengganti pakaian (termasuk NSFW)
+ * @returns URL hasil deepfake yang dihasilkan
+ */
+declare function deepfakeTransform({ buffer, prompt, }: DeepfakeInput): Promise<string>;
+
+/**
+ * Object containing song title, artist, url and cleaned lyrics
+ */
+interface LyricsResult {
+    title: string;
+    artist: string;
+    lyrics: string;
+    url: string;
+}
+/**
+ * Fetch lyrics and metadata for a given song query from songtexte.com
+ *
+ * @param query The song name or artist and title to search
+ * @returns Object containing song title, artist, url and cleaned lyrics
+ * @throws If no result or network/scrape failure occurs
+ */
+declare function SearchLyrics(query: string): Promise<LyricsResult>;
+
+export { AIFreeboxImage, type AIFreeboxImageParams, type Anime, type AnimeData, AnimeFinder, type AnimeFinderError, type AnimeFinderResult, type AnimeReference, Animob, type ChatPayload, type DeepfakeInput, DeepseekR1, type DownloadLink, type EnhanceImageOptions, type Episode, type FantaxyCompletedResponse, FeloSearch, GeminiAi, type GeminiInlineImage, type GeminiPromptPart, type GeminiRequest, type GeminiResponse, type GeminiResponseCandidate, type GenreData, type GenreList, type GradioChatOutput, type GradioStreamMessage, type HumanizeFailure, type HumanizeResult, type HumanizeSuccess, type ImageResult, ImageToGhibli, type InstagramMedia, type LogoFileData, type LogoRequestOptions, type LyricsResult, MagicStudioArt, type McpedlCategory, type McpedlEntry, McpedlSearch, type MediaFormat, type MediaTrack, type Metadata, type MinecraftProfile, MinecraftStalk, type MinecraftStalkResult, MobileLegendsNewsInfo, type MobileLegendsNewsItem, Nakanime, type NameHistoryEntry, PoemGenerator, type RetryOptions, type RewriteLevel, type RewriteSettings, type ScrapeResult, SearchLyrics, type SearchResult, type StickerPack, type StreamResponse, type StreamServer, type SupportedAspectRatios, type SupportedSlugs, TempMail, type TempMailCreateData, type TempMailCreateResult, type TempMailMessage, type TempMailResponse, TextCraftClient, type TextCraftInput, type TikTokResult, type TransformInitResponse, type TransformRequest, type TransformStatusResponse, type UploadResponse, type VideoResult, type WebSocketMessage, categoryMap, deepfakeTransform, downloadTikTok, enhanceImage, generateLogo, getStickersFromPack, humanizeText, instagram, poemLanguages, poemLengths, poemTypes, searchSticker, ytdl };

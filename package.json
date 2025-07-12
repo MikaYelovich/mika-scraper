@@ -1,23 +1,31 @@
 {
   "name": "mika-scraper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modular and extensible web scraping toolkit built with TypeScript, axios, and cheerio.",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/cjs/index.cjs.js",
+  "module": "./dist/esm/index.esm.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.esm.js",
+      "require": "./dist/cjs/index.cjs.js"
+    }
+  },
   "files": [
     "dist",
     "test"
   ],
   "bin": {
-    "mika-scraper": "dist/cli.cjs.js"
+    "mika-scraper": "./dist/cjs/cli.cjs.js"
   },
   "scripts": {
     "build": "tsup",
     "build:obf": "tsup && node build/obfuscate.js",
-    "build:types": "tsc -p tsconfig.types.json",
-    "build:full": "tsup && tsc -p tsconfig.types.json && node build/obfuscate.js",
-    "start": "node dist/index.cjs.js",
+    "build:types": "tsc -p tsconfig.build.json",
+    "build:esm": "cross-env BUILD_FORMAT=esm tsup",
+    "build:cjs": "cross-env BUILD_FORMAT=cjs tsup",
+    "build:full": "npm run build:obf && node build/moveFileToFolder.js",
+    "start": "node dist/cjs/index.cjs.js",
     "dev": "tsup --watch --onSuccess \"node dist/index.cjs.js\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -26,21 +34,21 @@
     "test:watch": "vitest --watch",
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
-    "prepare": "npm run build:obf"
+    "prepare": "npm run build:full"
   },
   "keywords": [
     "scraper",
     "web scraping",
-    "axios",
-    "cheerio",
     "typescript",
     "obfuscator",
     "textcraft",
     "zod",
-    "mika-scraper"
+    "mika-scraper",
+    "cli",
+    "scrapper"
   ],
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=16.0.0"
   },
   "author": "Zann Roderizz <zannlovez@gmail.com>",
   "repository": {
@@ -52,12 +60,13 @@
     "url": "https://github.com/MikaYelovich/mika-scraper/issues"
   },
   "license": "MIT",
-  "type": "commonjs",
   "dependencies": {
     "atob": "^2.1.2",
     "axios": "^1.10.0",
+    "boxen": "^8.0.1",
     "chalk": "^5.3.0",
     "cheerio": "^1.1.0",
+    "cross-env": "^7.0.3",
     "eventsource": "^4.0.0",
     "fast-glob": "^3.3.3",
     "fast-xml-parser": "^5.2.5",
@@ -78,6 +87,7 @@
     "@types/gradient-string": "^1.1.6",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^24.0.13",
+    "@types/ws": "^8.18.1",
     "@types/xml2js": "^0.4.14",
     "@types/yargs": "^17.0.28",
     "@typescript-eslint/eslint-plugin": "^8.36.0",
