@@ -1,14 +1,25 @@
 {
   "name": "mika-scraper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A modular and extensible web scraping toolkit built with TypeScript, axios, and cheerio.",
+  "type": "module",
   "main": "./dist/cjs/index.cjs.js",
   "module": "./dist/esm/index.esm.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.esm.js",
-      "require": "./dist/cjs/index.cjs.js"
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.esm.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.cts",
+        "default": "./dist/cjs/index.cjs.js"
+      }
+    },
+    "./cli": {
+      "import": "./dist/esm/cli.esm.js",
+      "require": "./dist/cjs/cli.cjs.js"
     }
   },
   "files": [
@@ -72,6 +83,7 @@
     "fast-xml-parser": "^5.2.5",
     "figlet": "^1.6.0",
     "gradient-string": "^2.0.2",
+    "inquirer": "^12.7.0",
     "jsdom": "^26.1.0",
     "node-fetch": "^3.3.2",
     "ora": "^7.0.1",
@@ -85,6 +97,7 @@
     "@types/eventsource": "^1.1.15",
     "@types/figlet": "^1.5.7",
     "@types/gradient-string": "^1.1.6",
+    "@types/inquirer": "^9.0.8",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^24.0.13",
     "@types/ws": "^8.18.1",

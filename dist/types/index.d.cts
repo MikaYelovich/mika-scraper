@@ -813,44 +813,25 @@ interface GeminiResponse {
  */
 declare function GeminiAi(apiKey: string, textPrompt?: string, imageDataBase64?: string, mimeType?: string): Promise<string>;
 
-interface UploadResponseUrl {
-    url: string;
-}
 /**
- * Interface untuk response upload gambar ke GhibliAI.
+ * Available Studio Ghibli art styles.
  */
-interface UploadResponse {
-    data: UploadResponseUrl;
-}
+type GhibliStyle = 'Spirited Away' | "Howl's Castle" | 'Princess Mononoke' | 'Totoro';
 /**
- * Interface untuk request transformasi gambar ke GhibliAI.
+ * Input options for generating a Ghibli-style image.
  */
-interface TransformRequest {
-    imageUrl: string;
-    sessionId: string;
+interface GhibliGenerationOptions {
     prompt: string;
-    timestamp: string;
+    style: GhibliStyle;
 }
 /**
- * Interface untuk response transformasi gambar ke GhibliAI.
+ * Generates an image using the Ghibli AI Image Generator and uploads it to Catbox.
+ *
+ * @param options - Contains the prompt and Ghibli style to use.
+ * @returns A publicly accessible URL of the generated image.
+ * @throws Error if the generation or upload process fails.
  */
-interface TransformInitResponse {
-    taskId: string;
-}
-/**
- * Interface untuk response status transformasi gambar ke GhibliAI.
- */
-interface TransformStatusResponse {
-    status: 'pending' | 'success' | 'error';
-    imageUrl?: string;
-}
-/**
- * Mengubah sebuah buffer gambar menjadi gaya Ghibli menggunakan Ghibli AI.
- * @param buffer Buffer gambar.
- * @param prompt Prompt kustom untuk transformasi gambar.
- * @returns URL hasil gambar dalam gaya Ghibli.
- */
-declare function ImageToGhibli(buffer: Buffer, prompt?: string): Promise<string>;
+declare function TextToGhibli(options: GhibliGenerationOptions): Promise<string>;
 
 /**
  * Minecraft player name history entry
@@ -1007,4 +988,79 @@ interface LyricsResult {
  */
 declare function SearchLyrics(query: string): Promise<LyricsResult>;
 
-export { AIFreeboxImage, type AIFreeboxImageParams, type Anime, type AnimeData, AnimeFinder, type AnimeFinderError, type AnimeFinderResult, type AnimeReference, Animob, type ChatPayload, type DeepfakeInput, DeepseekR1, type DownloadLink, type EnhanceImageOptions, type Episode, type FantaxyCompletedResponse, FeloSearch, GeminiAi, type GeminiInlineImage, type GeminiPromptPart, type GeminiRequest, type GeminiResponse, type GeminiResponseCandidate, type GenreData, type GenreList, type GradioChatOutput, type GradioStreamMessage, type HumanizeFailure, type HumanizeResult, type HumanizeSuccess, type ImageResult, ImageToGhibli, type InstagramMedia, type LogoFileData, type LogoRequestOptions, type LyricsResult, MagicStudioArt, type McpedlCategory, type McpedlEntry, McpedlSearch, type MediaFormat, type MediaTrack, type Metadata, type MinecraftProfile, MinecraftStalk, type MinecraftStalkResult, MobileLegendsNewsInfo, type MobileLegendsNewsItem, Nakanime, type NameHistoryEntry, PoemGenerator, type RetryOptions, type RewriteLevel, type RewriteSettings, type ScrapeResult, SearchLyrics, type SearchResult, type StickerPack, type StreamResponse, type StreamServer, type SupportedAspectRatios, type SupportedSlugs, TempMail, type TempMailCreateData, type TempMailCreateResult, type TempMailMessage, type TempMailResponse, TextCraftClient, type TextCraftInput, type TikTokResult, type TransformInitResponse, type TransformRequest, type TransformStatusResponse, type UploadResponse, type VideoResult, type WebSocketMessage, categoryMap, deepfakeTransform, downloadTikTok, enhanceImage, generateLogo, getStickersFromPack, humanizeText, instagram, poemLanguages, poemLengths, poemTypes, searchSticker, ytdl };
+/**
+ * Options required to generate a prompt from an image.
+ */
+interface ImageToPromptOptions {
+    imageUrl: string;
+    imageBuffer?: Buffer;
+}
+/**
+ * Expected response from NeuralFrames API.
+ */
+interface NeuralFramesResponse {
+    prompt: string;
+    [key: string]: any;
+}
+/**
+ * Uploads an image (either from a URL or a raw Buffer) to NeuralFrames'
+ * CLIP Interrogate endpoint and returns an AI-generated textual prompt.
+ *
+ * @param options - The input options containing either a URL or Buffer.
+ * @returns A promise resolving to the AI-generated prompt.
+ * @throws Error if both input types are missing or the API fails.
+ */
+declare function imageToPrompt(options: ImageToPromptOptions): Promise<NeuralFramesResponse>;
+
+/**
+ * Structure of successful video extraction result.
+ */
+interface SnackVideoSuccess {
+    status: true;
+    video: string;
+}
+/**
+ * Structure of a failed video extraction attempt.
+ */
+interface SnackVideoFailure {
+    status: false;
+    message: string;
+}
+/**
+ * Unified type for the result.
+ */
+type SnackVideoResult = SnackVideoSuccess | SnackVideoFailure;
+/**
+ * Downloads video data from a SnackVideo URL using snackdownloader.com's public API.
+ *
+ * @param url - A valid SnackVideo video link.
+ * @returns An object indicating success/failure and the video download URL or error message.
+ */
+declare function downloadSnackVideo(url: string): Promise<SnackVideoResult>;
+
+/**
+ * Uploads a given image buffer to Catbox for public access.
+ *
+ * @param buffer - The image file buffer.
+ * @param filename - Name to assign to the file on Catbox.
+ * @returns A public Catbox URL pointing to the uploaded image.
+ */
+declare function uploadToCatbox(buffer: Buffer, filename: string): Promise<string>;
+
+/**
+ * Represents a single guess-the-flag question.
+ */
+interface FlagQuestion {
+    imageUrl: string;
+    correctCountry: string;
+    options: string[];
+}
+/**
+ * Fetches and constructs a "Guess the Flag" question using real-time country data
+ * from the RESTCountries API.
+ *
+ * @returns A `FlagQuestion` object containing flag image URL, correct answer, and options.
+ */
+declare function GuessTheFlag(): Promise<FlagQuestion>;
+
+export { AIFreeboxImage, type AIFreeboxImageParams, type Anime, type AnimeData, AnimeFinder, type AnimeFinderError, type AnimeFinderResult, type AnimeReference, Animob, type ChatPayload, type DeepfakeInput, DeepseekR1, type DownloadLink, type EnhanceImageOptions, type Episode, type FantaxyCompletedResponse, FeloSearch, type FlagQuestion, GeminiAi, type GeminiInlineImage, type GeminiPromptPart, type GeminiRequest, type GeminiResponse, type GeminiResponseCandidate, type GenreData, type GenreList, type GhibliGenerationOptions, type GhibliStyle, type GradioChatOutput, type GradioStreamMessage, GuessTheFlag, type HumanizeFailure, type HumanizeResult, type HumanizeSuccess, type ImageResult, type ImageToPromptOptions, type InstagramMedia, type LogoFileData, type LogoRequestOptions, type LyricsResult, MagicStudioArt, type McpedlCategory, type McpedlEntry, McpedlSearch, type MediaFormat, type MediaTrack, type Metadata, type MinecraftProfile, MinecraftStalk, type MinecraftStalkResult, MobileLegendsNewsInfo, type MobileLegendsNewsItem, Nakanime, type NameHistoryEntry, type NeuralFramesResponse, PoemGenerator, type RetryOptions, type RewriteLevel, type RewriteSettings, type ScrapeResult, SearchLyrics, type SearchResult, type SnackVideoFailure, type SnackVideoResult, type SnackVideoSuccess, type StickerPack, type StreamResponse, type StreamServer, type SupportedAspectRatios, type SupportedSlugs, TempMail, type TempMailCreateData, type TempMailCreateResult, type TempMailMessage, type TempMailResponse, TextCraftClient, type TextCraftInput, TextToGhibli, type TikTokResult, type VideoResult, type WebSocketMessage, categoryMap, deepfakeTransform, downloadSnackVideo, downloadTikTok, enhanceImage, generateLogo, getStickersFromPack, humanizeText, imageToPrompt, instagram, poemLanguages, poemLengths, poemTypes, searchSticker, uploadToCatbox, ytdl };
