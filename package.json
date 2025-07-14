@@ -1,7 +1,7 @@
 {
   "name": "mika-scraper",
-  "version": "1.0.21",
-  "description": "A modular and extensible web scraping toolkit built with TypeScript, axios, and cheerio.",
+  "version": "1.0.3",
+  "description": "A modular and extensible web scraping toolkit built with TypeScript",
   "type": "module",
   "main": "./dist/cjs/index.cjs.js",
   "module": "./dist/esm/index.esm.js",

@@ -1120,4 +1120,43 @@ interface Text2NSFWOptions {
  */
 declare function text2nsfw(prompt: string, { base_model, style, ratio, }?: Text2NSFWOptions): Promise<string[]>;
 
-export { AIFreeboxImage, type AIFreeboxImageParams, type Anime, type AnimeData, AnimeFinder, type AnimeFinderError, type AnimeFinderResult, type AnimeReference, Animob, ChatGPTOnline, type ChatPayload, type DeepfakeInput, DeepseekR1, type DownloadLink, type EnhanceImageOptions, type Episode, type FantaxyCompletedResponse, FeloSearch, type FlagQuestion, GeminiCanvas, type GenreData, type GenreList, type GhibliGenerationOptions, type GhibliStyle, type GradioChatOutput, type GradioStreamMessage, GuessTheFlag, type HumanizeFailure, type HumanizeResult, type HumanizeSuccess, type ImageResult, type ImageToPromptOptions, type InstagramMedia, type LogoFileData, type LogoRequestOptions, type LyricsResult, MagicStudioArt, type McpedlCategory, type McpedlEntry, McpedlSearch, type MediaFormat, type MediaTrack, type Metadata, type MinecraftProfile, MinecraftStalk, type MinecraftStalkResult, MobileLegendsNewsInfo, type MobileLegendsNewsItem, Nakanime, type NameHistoryEntry, type NeuralFramesResponse, PoemGenerator, type RetryOptions, type RewriteLevel, type RewriteSettings, type ScrapeResult, SearchLyrics, type SearchResult, type SnackVideoFailure, type SnackVideoResult, type SnackVideoSuccess, type StickerPack, type StreamResponse, type StreamServer, type SupportedAspectRatios, type SupportedSlugs, TempMail, type TempMailCreateData, type TempMailCreateResult, type TempMailMessage, type TempMailResponse, type Text2NSFWOptions, TextCraftClient, type TextCraftInput, TextToGhibli, type TikTokResult, type TokopediaProduct, TokopediaSearch, type VideoResult, type WebSocketMessage, categoryMap, deepfakeTransform, downloadSnackVideo, downloadTikTok, enhanceImage, generateLogo, getStickersFromPack, humanizeText, imageToPrompt, instagram, nsfwModels, nsfwRatios, nsfwStyles, poemLanguages, poemLengths, poemTypes, searchSticker, text2nsfw, uploadToCatbox, ytdl };
+interface FilterConfig {
+    name: string;
+    prompt: string;
+    description: string;
+}
+interface ApplyFilterInput {
+    filter: keyof typeof MikaFilterImage.availableFilters;
+    base64Image: string;
+}
+interface ApplyFilterOutput {
+    imageBuffer?: Buffer;
+    textResponse?: string;
+}
+/**
+ * A service that applies AI-powered image filters
+ */
+declare class MikaFilterImage {
+    /**
+     * Static registry of supported filters with prompt definitions.
+     */
+    static availableFilters: Record<string, FilterConfig>;
+    /**
+     * Apply a registered filter to a base64-encoded image.
+     * @param input Input including the base64-encoded image and the filter name.
+     * @returns Image buffer and text response
+     */
+    static applyFilter(input: ApplyFilterInput): Promise<ApplyFilterOutput>;
+    /**
+     * Get metadata about available filters.
+     * @returns A list of filter names and their descriptions.
+     */
+    static getFilters(): FilterConfig[];
+    /**
+     * Get the total number of available filters.
+     * @returns The total number of available filters.
+     */
+    static getTotalFilters(): number;
+}
+
+export { AIFreeboxImage, type AIFreeboxImageParams, type Anime, type AnimeData, AnimeFinder, type AnimeFinderError, type AnimeFinderResult, type AnimeReference, Animob, ChatGPTOnline, type ChatPayload, type DeepfakeInput, DeepseekR1, type DownloadLink, type EnhanceImageOptions, type Episode, type FantaxyCompletedResponse, FeloSearch, type FlagQuestion, GeminiCanvas, type GenreData, type GenreList, type GhibliGenerationOptions, type GhibliStyle, type GradioChatOutput, type GradioStreamMessage, GuessTheFlag, type HumanizeFailure, type HumanizeResult, type HumanizeSuccess, type ImageResult, type ImageToPromptOptions, type InstagramMedia, type LogoFileData, type LogoRequestOptions, type LyricsResult, MagicStudioArt, type McpedlCategory, type McpedlEntry, McpedlSearch, type MediaFormat, type MediaTrack, type Metadata, MikaFilterImage, type MinecraftProfile, MinecraftStalk, type MinecraftStalkResult, MobileLegendsNewsInfo, type MobileLegendsNewsItem, Nakanime, type NameHistoryEntry, type NeuralFramesResponse, PoemGenerator, type RetryOptions, type RewriteLevel, type RewriteSettings, type ScrapeResult, SearchLyrics, type SearchResult, type SnackVideoFailure, type SnackVideoResult, type SnackVideoSuccess, type StickerPack, type StreamResponse, type StreamServer, type SupportedAspectRatios, type SupportedSlugs, TempMail, type TempMailCreateData, type TempMailCreateResult, type TempMailMessage, type TempMailResponse, type Text2NSFWOptions, TextCraftClient, type TextCraftInput, TextToGhibli, type TikTokResult, type TokopediaProduct, TokopediaSearch, type VideoResult, type WebSocketMessage, categoryMap, deepfakeTransform, downloadSnackVideo, downloadTikTok, enhanceImage, generateLogo, getStickersFromPack, humanizeText, imageToPrompt, instagram, nsfwModels, nsfwRatios, nsfwStyles, poemLanguages, poemLengths, poemTypes, searchSticker, text2nsfw, uploadToCatbox, ytdl };
