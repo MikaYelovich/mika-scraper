@@ -24,14 +24,11 @@
 
 ---
 
-## 🔥 New in v1.0.2
+## 🔥 New in v1.0.3
 
 ### Core Fixes & Optimizations
 
-- ✅ Fixed ESM module issues
-- ✅ Reduced package size for faster installs
-- ✅ Enhanced error handling and messages
-- ✅ Fixed type exports and minor bugs
+- ✅ Fix Gemini Image Error
 
 ### 🆕 Features
 
@@ -40,7 +37,14 @@
 - `ToGhibli` – Turn prompts into Studio Ghibli style
 - `MCStalker`, `Nakanimendo`, `Song Lyrics`, `Gemini`, `CatboxUpload`, `imageToPrompt`, `SnackVideoDownloader`, `GuessFlag`
 
-> ⚠️ Note: Features like `Deepfake` are intended for ethical, educational use only.
+### 🥞 New Features
+
+- `ImageFilter` - Filter your image to many style, 39 filter (e.g: toBlack, toWhite, toHijab)
+- `GPTOnline` - Chat with GPT Online
+- `TextToNsfw` - Make text to NSFW image
+- `TokopediaSearch` - Search product info on Tokopedia
+
+> ⚠️ Note: Features like `Deepfake` ad `TextToNsfw` are intended for ethical, educational use only.
 
 ---
 

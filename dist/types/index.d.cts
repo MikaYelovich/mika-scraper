@@ -762,56 +762,16 @@ interface AIFreeboxImageParams {
 declare function AIFreeboxImage(prompt: string, aspectRatio?: SupportedAspectRatios, slug?: SupportedSlugs): Promise<string>;
 
 /**
- * Represents an inline image for a Gemini prompt.
+ * Generates an image and text response from Gemini using prompt and base64 image.
+ * @param prompt Text prompt to condition image generation
+ * @param base64Image Base64-encoded image data
+ * @param mimeType MIME type (e.g., "image/png")
+ * @returns Object containing image buffer and textual response
  */
-interface GeminiInlineImage {
-    mime_type: string;
-    data: string;
-}
-/**
- * Represents a part of a Gemini prompt.
- */
-interface GeminiPromptPart {
-    text?: string;
-    inline_data?: GeminiInlineImage;
-}
-/**
- * Represents a Gemini prompt.
- */
-interface GeminiRequest {
-    contents: {
-        parts: GeminiPromptPart[];
-    }[];
-}
-/**
- * Represents a response from the Gemini API.
- */
-interface GeminiResponseCandidate {
-    content?: {
-        parts?: {
-            text: string;
-        }[];
-    };
-}
-/**
- * Represents the response from the Gemini API.
- */
-interface GeminiResponse {
-    candidates?: GeminiResponseCandidate[];
-    promptFeedback?: {
-        blockReason?: string;
-        safetyRatings?: any;
-    };
-}
-/**
- * Generates content using Gemini AI.
- * @param apiKey - Your Gemini API Key
- * @param textPrompt - Prompt to send as text
- * @param imageDataBase64 - Optional base64-encoded image
- * @param mimeType - MIME type of the image (defaults to 'image/jpeg')
- * @returns AI-generated string content or error details
- */
-declare function GeminiAi(apiKey: string, textPrompt?: string, imageDataBase64?: string, mimeType?: string): Promise<string>;
+declare function GeminiCanvas(prompt: string, base64Image: string, mimeType: string, apiKey: string): Promise<{
+    imageBuffer?: Buffer;
+    textResponse?: string;
+}>;
 
 /**
  * Available Studio Ghibli art styles.
@@ -1063,4 +1023,101 @@ interface FlagQuestion {
  */
 declare function GuessTheFlag(): Promise<FlagQuestion>;
 
-export { AIFreeboxImage, type AIFreeboxImageParams, type Anime, type AnimeData, AnimeFinder, type AnimeFinderError, type AnimeFinderResult, type AnimeReference, Animob, type ChatPayload, type DeepfakeInput, DeepseekR1, type DownloadLink, type EnhanceImageOptions, type Episode, type FantaxyCompletedResponse, FeloSearch, type FlagQuestion, GeminiAi, type GeminiInlineImage, type GeminiPromptPart, type GeminiRequest, type GeminiResponse, type GeminiResponseCandidate, type GenreData, type GenreList, type GhibliGenerationOptions, type GhibliStyle, type GradioChatOutput, type GradioStreamMessage, GuessTheFlag, type HumanizeFailure, type HumanizeResult, type HumanizeSuccess, type ImageResult, type ImageToPromptOptions, type InstagramMedia, type LogoFileData, type LogoRequestOptions, type LyricsResult, MagicStudioArt, type McpedlCategory, type McpedlEntry, McpedlSearch, type MediaFormat, type MediaTrack, type Metadata, type MinecraftProfile, MinecraftStalk, type MinecraftStalkResult, MobileLegendsNewsInfo, type MobileLegendsNewsItem, Nakanime, type NameHistoryEntry, type NeuralFramesResponse, PoemGenerator, type RetryOptions, type RewriteLevel, type RewriteSettings, type ScrapeResult, SearchLyrics, type SearchResult, type SnackVideoFailure, type SnackVideoResult, type SnackVideoSuccess, type StickerPack, type StreamResponse, type StreamServer, type SupportedAspectRatios, type SupportedSlugs, TempMail, type TempMailCreateData, type TempMailCreateResult, type TempMailMessage, type TempMailResponse, TextCraftClient, type TextCraftInput, TextToGhibli, type TikTokResult, type VideoResult, type WebSocketMessage, categoryMap, deepfakeTransform, downloadSnackVideo, downloadTikTok, enhanceImage, generateLogo, getStickersFromPack, humanizeText, imageToPrompt, instagram, poemLanguages, poemLengths, poemTypes, searchSticker, uploadToCatbox, ytdl };
+/**
+ * Fetches a response from gptonline.ai via simulated user message.
+ * @param message - The user's message to send to GPT Online
+ * @returns The AI's response as a string
+ */
+declare function ChatGPTOnline(message: string): Promise<string>;
+
+/**
+ * Interface for Tokopedia product object.
+ */
+interface TokopediaProduct {
+    id: string;
+    name: string;
+    url: string;
+    price: {
+        text: string;
+        number: number;
+    };
+    mediaURL: {
+        image: string;
+    };
+    shop: {
+        name: string;
+        city: string;
+    };
+}
+/**
+ * Scrape Tokopedia search results using GraphQL API.
+ * @param query - Product keyword to search.
+ * @returns Array of product objects.
+ */
+declare const TokopediaSearch: (query: string) => Promise<TokopediaProduct[]>;
+
+/**
+ * nsfwModels supported
+ */
+declare const nsfwModels: {
+    flux: string;
+    artist: string;
+    anime: string;
+    realistic: string;
+    realistic_v2: string;
+    nsfw_anime: string;
+};
+/**
+ * styles supported
+ */
+declare const nsfwStyles: string[];
+/**
+ * ratios supported
+ */
+declare const nsfwRatios: {
+    '1:1': {
+        width: number;
+        height: number;
+    };
+    '3:4': {
+        width: number;
+        height: number;
+    };
+    '4:3': {
+        width: number;
+        height: number;
+    };
+    '4:5': {
+        width: number;
+        height: number;
+    };
+    '5:4': {
+        width: number;
+        height: number;
+    };
+    '9:16': {
+        width: number;
+        height: number;
+    };
+    '16:9': {
+        width: number;
+        height: number;
+    };
+};
+/**
+ * Options for text2nsfw
+ */
+interface Text2NSFWOptions {
+    base_model?: keyof typeof nsfwModels;
+    style?: string;
+    ratio?: keyof typeof nsfwRatios;
+}
+/**
+ * Generate NSFW-styled artwork based on text prompt
+ * @param prompt - Textual description of the desired image
+ * @param options - Optional model/style/ratio parameters
+ * @returns Array of image URLs
+ */
+declare function text2nsfw(prompt: string, { base_model, style, ratio, }?: Text2NSFWOptions): Promise<string[]>;
+
+export { AIFreeboxImage, type AIFreeboxImageParams, type Anime, type AnimeData, AnimeFinder, type AnimeFinderError, type AnimeFinderResult, type AnimeReference, Animob, ChatGPTOnline, type ChatPayload, type DeepfakeInput, DeepseekR1, type DownloadLink, type EnhanceImageOptions, type Episode, type FantaxyCompletedResponse, FeloSearch, type FlagQuestion, GeminiCanvas, type GenreData, type GenreList, type GhibliGenerationOptions, type GhibliStyle, type GradioChatOutput, type GradioStreamMessage, GuessTheFlag, type HumanizeFailure, type HumanizeResult, type HumanizeSuccess, type ImageResult, type ImageToPromptOptions, type InstagramMedia, type LogoFileData, type LogoRequestOptions, type LyricsResult, MagicStudioArt, type McpedlCategory, type McpedlEntry, McpedlSearch, type MediaFormat, type MediaTrack, type Metadata, type MinecraftProfile, MinecraftStalk, type MinecraftStalkResult, MobileLegendsNewsInfo, type MobileLegendsNewsItem, Nakanime, type NameHistoryEntry, type NeuralFramesResponse, PoemGenerator, type RetryOptions, type RewriteLevel, type RewriteSettings, type ScrapeResult, SearchLyrics, type SearchResult, type SnackVideoFailure, type SnackVideoResult, type SnackVideoSuccess, type StickerPack, type StreamResponse, type StreamServer, type SupportedAspectRatios, type SupportedSlugs, TempMail, type TempMailCreateData, type TempMailCreateResult, type TempMailMessage, type TempMailResponse, type Text2NSFWOptions, TextCraftClient, type TextCraftInput, TextToGhibli, type TikTokResult, type TokopediaProduct, TokopediaSearch, type VideoResult, type WebSocketMessage, categoryMap, deepfakeTransform, downloadSnackVideo, downloadTikTok, enhanceImage, generateLogo, getStickersFromPack, humanizeText, imageToPrompt, instagram, nsfwModels, nsfwRatios, nsfwStyles, poemLanguages, poemLengths, poemTypes, searchSticker, text2nsfw, uploadToCatbox, ytdl };
