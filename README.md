@@ -24,7 +24,7 @@
 
 ---
 
-## 🔥 New in v1.0.3
+## 🔥 New in v1.1.0
 
 ### Core Fixes & Optimizations
 
