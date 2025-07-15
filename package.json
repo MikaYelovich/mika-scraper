@@ -1,6 +1,6 @@
 {
   "name": "mika-scraper",
-  "version": "1.1.01",
+  "version": "1.1.2",
   "description": "A modular and extensible web scraping toolkit built with TypeScript",
   "type": "module",
   "main": "./dist/cjs/index.cjs.js",
@@ -37,6 +37,10 @@
     "build:cjs": "cross-env BUILD_FORMAT=cjs tsup",
     "build:full": "npm run build:obf && node build/moveFileToFolder.js",
     "start": "node dist/cjs/index.cjs.js",
+    "docs:create": "typedoc --options typedoc.json",
+    "docs:remove": "rimraf docs",
+    "docs:enhanced": "node build/updateMD.js",
+    "docs:full": "npm run docs:create && npm run docs:enhanced && node build/move-to-app.js",
     "dev": "tsup --watch --onSuccess \"node dist/index.cjs.js\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -59,7 +63,7 @@
     "scrapper"
   ],
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.0.0"
   },
   "author": "Zann Roderizz <zannlovez@gmail.com>",
   "repository": {
@@ -89,6 +93,7 @@
     "mime-types": "^3.0.1",
     "node-fetch": "^3.3.2",
     "ora": "^7.0.1",
+    "typedoc-theme-hierarchy": "^6.0.0",
     "uuid": "^11.1.0",
     "xml2js": "^0.6.2",
     "yargs": "^17.7.2",
@@ -111,7 +116,13 @@
     "eslint-config-prettier": "^10.1.5",
     "javascript-obfuscator": "^4.1.1",
     "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
     "tsup": "^8.5.0",
+    "typedoc": "^0.28.7",
+    "typedoc-plugin-markdown": "^4.7.0",
+    "typedoc-plugin-mermaid": "^1.12.0",
+    "typedoc-plugin-no-inherit": "^1.6.1",
+    "typedoc-plugin-zod": "^1.4.2",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }

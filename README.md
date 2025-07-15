@@ -1,6 +1,6 @@
 # 🌐 MIKA Scraper — Modular, Modern Web Scraping Toolkit
 
-![MIKA Scraper Logo](https://files.catbox.moe/cj0afq.jpeg)
+![MIKA Scraper Logo](https://files.catbox.moe/mhd4vl.jpeg)
 
 [![NPM Version](https://img.shields.io/npm/v/mika-scraper.svg?style=for-the-badge)](https://www.npmjs.com/package/mika-scraper)
 [![Downloads](https://img.shields.io/npm/dt/mika-scraper.svg?style=for-the-badge)](https://www.npmjs.com/package/mika-scraper)
@@ -24,11 +24,12 @@
 
 ---
 
-## 🔥 New in v1.1.0
+## 🔥 New in v1.1.2
 
 ### Core Fixes & Optimizations
 
-- ✅ Fix Gemini Image Error
+- ✅ Fix Some Errors
+- ✅ Adding Some Features
 
 ### 🆕 Features
 
@@ -39,10 +40,9 @@
 
 ### 🥞 New Features
 
-- `ImageFilter` - Filter your image to many style, 39 filter (e.g: toBlack, toWhite, toHijab)
-- `GPTOnline` - Chat with GPT Online
-- `TextToNsfw` - Make text to NSFW image
-- `TokopediaSearch` - Search product info on Tokopedia
+- `MikaAI` - Chat With High Quality Model Chat Bot
+
+### Adding Documentation Website
 
 > ⚠️ Note: Features like `Deepfake` ad `TextToNsfw` are intended for ethical, educational use only.
 
@@ -107,7 +107,9 @@ mika-scraper humanize --text "Nama saya adalah Zann" --level enhanced
 
 ## 📚 Documentation
 
-> 📘 Full documentation is currently being expanded.
+🌸 Documentation is now ready
+
+> 🍃 Link Documentation: [https://mika-scrapdocs.ichiapi.my.id](https://mika-scrapdocs.ichiapi.my.id)
 
 ---
 
