@@ -1038,11 +1038,11 @@ declare function ChatGPTOnline(message: string): Promise<string>;
  *
  * @param imageUrl The URL of the image to be edited.
  * @param prompt The text prompt describing the desired edit.
- * @param apiKey (Optional) Your OpenAI API key. If not provided, it will look for OPENAI_API_KEY in environment variables.
+ * @param apiKey Your OpenAI API key.
  * @returns A Promise that resolves with the base64 encoded edited image, or null if an error occurs.
  * @throws Will throw an error if the image download fails, API request fails, or no base64 image is returned.
  */
-declare function GPTImageCanvas(imageUrl: string, prompt: string, apiKey?: string): Promise<string | null>;
+declare function GPTImageCanvas(imageUrl: string, prompt: string, apiKey: string): Promise<string | null>;
 
 /**
  * Interface for Tokopedia product object.
