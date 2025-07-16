@@ -24,27 +24,36 @@
 
 ---
 
-## 🔥 New in v1.1.2
+## 🔥 New in v1.2.0
 
-### Core Fixes & Optimizations
-
-- ✅ Fix Some Errors
 - ✅ Adding Some Features
-
-### 🆕 Features
-
-- `AIFreeBox`
-- `Deepfake` – Realistic media generation
-- `ToGhibli` – Turn prompts into Studio Ghibli style
-- `MCStalker`, `Nakanimendo`, `Song Lyrics`, `Gemini`, `CatboxUpload`, `imageToPrompt`, `SnackVideoDownloader`, `GuessFlag`
 
 ### 🥞 New Features
 
-- `MikaAI` - Chat With High Quality Model Chat Bot
+- `BlackboxChat()` - Chat With Blackbox AI Model
+  > ♑ Cek Documentation [BlackboxChat()](https://mika-scrapdocs.ichiapi.my.id/functions/BlackboxChat)
+- `GPTImageCanvas()` - Edit your image using GPT Image
+  > 🌊 Cek Documentation [GPTImageCanvas()](https://mika-scrapdocs.ichiapi.my.id/functions/GPTImageCanvas)
+- `ScreenshotWebsite()` - Screenshot a website
+  > 🥬 Cek Documentation [ScreenshotWebsite()](https://mika-scrapdocs.ichiapi.my.id/functions/ScreenshotWebsite)
+- `VocalRemover()` - Remove the Vocal on the Audio
+  > 🥟 Cek Documentation [VocalRemover()](https://mika-scrapdocs.ichiapi.my.id/classes/VocalRemover)
+- `YoutubeTracker()` - Track Youtube with username
+  > 🌺 Cek Documentation [YoutubeTracker()](https://mika-scrapdocs.ichiapi.my.id/classes/YoutubeTracker)
+- `YTDL2()` - Download Audio and Video on Youtube ( Versi 2 )
+  > 🥬 Cek Documentation [YTDL2()](https://mika-scrapdocs.ichiapi.my.id/classes/YTDL2)
+- `TiktokEarnings()` - Track Tictiok Earnings with username
+  > 💝 Cek Documentation [TiktokEarnings()](https://mika-scrapdocs.ichiapi.my.id/classes/TiktokEarnings)
+- `TranslateImageClient()` - Translate to Text into the Image Ecommerse Product
+  > 💝 Cek Documentation [TranslateImageClient()](https://mika-scrapdocs.ichiapi.my.id/classes/TranslateImageClient)
+- `ChatUpAI()`
+  > 💝 Cek Documentation [ChatUpAI()](https://mika-scrapdocs.ichiapi.my.id/classes/ChatUpAI)
+- `GalaxyAI()`
+  > 💝 Cek Documentation [GalaxyAI()](https://mika-scrapdocs.ichiapi.my.id/classes/GalaxyAI)
+- `SnappinDownloader()`
+  > 💝 Cek Documentation [SnappinDownloader()](https://mika-scrapdocs.ichiapi.my.id/classes/SnappinDownloader)
 
-### Adding Documentation Website
-
-> ⚠️ Note: Features like `Deepfake` ad `TextToNsfw` are intended for ethical, educational use only.
+> ⚠️ Note: Features like `DeepfakeTransform()` ad `text2nsfw()` are intended for ethical, educational use only.
 
 ---
 
@@ -56,6 +65,8 @@ npm install mika-scraper
 yarn add mika-scraper
 # or
 pnpm add mika-scraper
+# or
+bun install mika-scraper
 ```
 
 ---
@@ -79,7 +90,7 @@ const { humanizeText } = require('mika-scraper');
 
 ```bash
 npm install -g mika-scraper
-
+# if done, run a command, (e.g in below)
 mika-scraper humanize --text "Nama saya adalah Zann" --level enhanced
 ```
 
@@ -109,7 +120,7 @@ mika-scraper humanize --text "Nama saya adalah Zann" --level enhanced
 
 🌸 Documentation is now ready
 
-> 🍃 Link Documentation: [https://mika-scrapdocs.ichiapi.my.id](https://mika-scrapdocs.ichiapi.my.id)
+> 🍃 Link Documentation: [https://mika-scrapdocs.ichiapi.my.id](https://mika-scrapdocs.ichiapi.my.id/resources)
 
 ---
 
